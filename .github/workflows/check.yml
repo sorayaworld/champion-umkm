@@ -13,8 +13,39 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+
+      ################################
+      # RUN JUDGE SCRIPT
+      ################################
+
       - name: Make script executable
         run: chmod +x .github/workflows/judge-check.sh
 
+
       - name: Run judge script
-        run: .github/workflows/judge-check.sh
+        run: |
+          SCORE_OUTPUT=$(bash .github/workflows/judge-check.sh | tee /dev/stderr | grep "FINAL SCORE" | awk '{print $3}')
+          echo "SCORE=$SCORE_OUTPUT" >> $GITHUB_ENV
+
+
+      ################################
+      # EXPORT SCORE.JSON
+      ################################
+
+      - name: Export score.json
+        run: |
+          mkdir -p public
+          echo "{ \"score\": \"$SCORE\" }" > public/score.json
+
+
+      ################################
+      # COMMIT SCORE.JSON
+      ################################
+
+      - name: Commit score.json
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add public/score.json
+          git commit -m "update autojudge score" || echo "no changes"
+          git push
