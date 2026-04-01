@@ -52,4 +52,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function umkmProfile()
+    {
+        return $this->hasOne(UmkmProfile::class);
+    }
 }

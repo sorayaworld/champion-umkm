@@ -22,4 +22,9 @@ class UmkmProfile extends Model
         'province',
         'omzet',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
