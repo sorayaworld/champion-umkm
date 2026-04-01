@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Services\AuthService;
 use App\Traits\ApiResponse;
@@ -17,6 +18,16 @@ class AuthController extends Controller
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        $result = $this->authService->register($request->validated());
+
+        return $this->success([
+            'token' => $result['token'],
+            'user'  => new UserResource($result['user'])
+        ], 'Registrasi Berhasil', 201);
     }
 
     public function login(LoginRequest $request)
