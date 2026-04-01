@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('installments', function (Blueprint $table) {
+        Schema::create('amortization_schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('loan_id')->constrained('loans')->cascadeOnDelete();
-            $table->integer('month');
-            $table->decimal('principal', 15, 2);
-            $table->decimal('interest', 15, 2); 
-            $table->decimal('total', 15, 2);
+            $table->foreignUuid('loan_application_id')->constrained('loan_applications')->cascadeOnDelete();
+            $table->integer('installment_number');
+            $table->decimal('principal_payment', 15, 2);
+            $table->decimal('interest_payment', 15, 2); 
+            $table->decimal('total_payment', 15, 2);
             $table->decimal('remaining_balance', 15, 2);
             $table->date('due_date');
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('installments');
+        Schema::dropIfExists('amortization_schedules');
     }
 };

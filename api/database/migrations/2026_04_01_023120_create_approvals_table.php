@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approvals', function (Blueprint $table) {
+        Schema::create('approval_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('loan_id')->constrained('loans')->cascadeOnDelete();
-            $table->uuid('approved_by');
+            $table->foreignUuid('loan_application_id')->constrained('loan_applications')->cascadeOnDelete();
+            $table->foreignUuid('actor_id')->constrained('users')->cascadeOnDelete();
             $table->string('role');
-            $table->text('note')->nullable();
-            $table->string('status');
+            $table->string('action'); 
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('approvals');
+        Schema::dropIfExists('approval_logs');
     }
 };

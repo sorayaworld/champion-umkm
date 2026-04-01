@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('businesses', function (Blueprint $table) {
+        Schema::create('umkm_profiles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('business_name');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('omzet', 15, 2);
             $table->timestamps();
             $table->softDeletes();
+            
         });
     }
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('businesses');
+        Schema::dropIfExists('umkm_profiles');
     }
 };

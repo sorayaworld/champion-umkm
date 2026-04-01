@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loans', function (Blueprint $table) {
+        Schema::create('loan_applications', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('business_id')->constrained('businesses')->cascadeOnDelete(); 
+            $table->foreignUuid('umkm_profile_id')->constrained('umkm_profiles')->cascadeOnDelete(); 
             $table->decimal('amount', 15, 2);
             $table->integer('tenor'); 
             $table->string('purpose');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('monthly_installment', 15, 2)->nullable();
             $table->decimal('total_interest', 15, 2)->nullable();
             $table->decimal('total_payment', 15, 2)->nullable();
-            $table->string('status')->default('draft');
+            $table->string('status')->default('submitted');
             $table->foreignUuid('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUuid('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('approved_at')->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loans');
+        Schema::dropIfExists('loan_applications');
     }
 };
