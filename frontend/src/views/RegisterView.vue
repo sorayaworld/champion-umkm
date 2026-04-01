@@ -98,7 +98,7 @@ const handleRegister = async () => {
           </label>
           <input type="text" v-model="phone" required maxlength="16 "
            class="w-full px-4 py-3 border border-gray-200 rounded-md text-[#4F5665] placeholder-gray-400 focus:outline-none focus:border-[#F53838] focus:ring-1 focus:ring-[#F53838] transition-all"
-              placeholder="masukkan NIK">
+              placeholder="masukkan nomer telp">
         </div>
 
       
