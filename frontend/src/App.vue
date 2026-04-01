@@ -1,14 +1,15 @@
-<script setup></script>
+<script setup>
+import { RouterView } from 'vue-router'
+</script>
 
 <template>
-  <div class="flex items-center justify-center p-6">
-    <div class="bg-white p-8 rounded-2xl">
-      <h1 class="text-3xl font-extrabold text-blue-600">
-        test tailwinddddd
-      </h1>
-
-    </div>
-  </div>
+  <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
