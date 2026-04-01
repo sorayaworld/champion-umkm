@@ -46,6 +46,13 @@ class AuthController extends Controller
         ], 'Login berhasil');
     }
 
+    public function logout(Request $request)
+    {
+        $this->authService->logout($request->user());
+
+        return $this->success(null, 'Logout berhasil');
+    }
+
     public function me(Request $request)
     {
         return $this->success(
