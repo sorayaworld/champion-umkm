@@ -26,4 +26,23 @@ class LoanApplication extends Model
         'approved_by',
         'approved_at',
     ];
+    public function umkmProfile()
+    {
+        return $this->belongsTo(UmkmProfile::class);
+    }
+
+    public function amortizationSchedules()
+    {
+        return $this->hasMany(AmortizationSchedule::class);
+    }
+
+    public function reviewer()
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
+    public function approver()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
 }

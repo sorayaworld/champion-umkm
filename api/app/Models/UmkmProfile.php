@@ -27,4 +27,9 @@ class UmkmProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function loanApplications()
+    {
+        return $this->hasMany(LoanApplication::class);
+    }
 }
