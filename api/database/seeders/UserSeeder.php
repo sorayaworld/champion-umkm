@@ -16,6 +16,8 @@ class UserSeeder extends Seeder
             'name'     => 'user',
             'email'    => 'user@mail.com',
             'password' => $defaultPassword,
+            'nik'      => '1234567890123456',
+            'phone'    => '081234567',
             'role'     => 'borrower',
         ]);
 
@@ -23,6 +25,8 @@ class UserSeeder extends Seeder
             'name'     => 'Officer',
             'email'    => 'officer@mail.com',
             'password' => $defaultPassword,
+            'nik'      => '1234567890123456',
+            'phone'    => '081234567',
             'role'     => 'officer',
         ]);
 
@@ -30,7 +34,18 @@ class UserSeeder extends Seeder
             'name'     => 'Manager',
             'email'    => 'manager@mail.com',
             'password' => $defaultPassword,
+            'nik'      => '1234567890123456',
+            'phone'    => '081234567',
             'role'     => 'manager',
+        ]);
+
+        User::create([
+            'name'     => 'Super Admin',
+            'email'    => 'admin@mail.com',
+            'password' => $defaultPassword,
+            'nik'      => '1234567890123456',
+            'phone'    => '081234567',
+            'role'     => 'admin',
         ]);
     }
 }
