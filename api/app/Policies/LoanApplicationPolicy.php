@@ -6,7 +6,7 @@ use App\Models\LoanApplication;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ApplicationPolicy
+class LoanApplicationPolicy
 {
 
     public function review(User $user, LoanApplication $loanApplication): bool

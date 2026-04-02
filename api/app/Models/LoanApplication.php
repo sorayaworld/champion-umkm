@@ -45,4 +45,9 @@ class LoanApplication extends Model
     {
         return $this->belongsTo(User::class, 'approved_by');
     }
+
+    public function approvalLogs()
+    {
+        return $this->hasMany(ApprovalLog::class);
+    }
 }

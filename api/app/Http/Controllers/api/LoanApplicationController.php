@@ -30,17 +30,43 @@ class LoanApplicationController extends Controller
     {
         $user = $request->user();
         
+        $query = LoanApplication::query()->with('umkmProfile');
+
         if ($user->role === 'borrower') {
             $profile = $user->umkmProfile;
             if (!$profile) return $this->success([], 'No applications found (No UMKM Profile)');
-            $applications = $profile->loanApplications();
-        } else {
-            $applications = LoanApplication::query();
+            $query->where('umkm_profile_id', $profile->id);
         }
 
-        $applications = $applications->with('umkmProfile')->latest()->get();
+        if ($request->filled('search')) {
+            $query->whereHas('umkmProfile', function ($q) use ($request) {
+                $q->where('business_name', 'like', '%' . $request->search . '%');
+            });
+        }
 
-        return $this->success(LoanApplicationResource::collection($applications), 'Loan application list');
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        if ($request->filled('min_amount')) {
+            $query->where('amount', '>=', $request->min_amount);
+        }
+
+        if ($request->filled('max_amount')) {
+            $query->where('amount', '<=', $request->max_amount);
+        }
+
+        $applications = $query->latest()->paginate($request->get('limit', 10));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Loan application list',
+            'data'    => LoanApplicationResource::collection($applications)->response()->getData(true)
+        ]);
     }
 
     public function store(StoreLoanApplicationRequest $request)

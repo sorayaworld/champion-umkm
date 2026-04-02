@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\LoanApplicationController;
 use App\Http\Controllers\api\UmkmProfileController;
+use App\Http\Controllers\api\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}/approve', [LoanApplicationController::class, 'approve'])->middleware('role:manager');
         Route::put('/{id}/reject', [LoanApplicationController::class, 'reject'])->middleware('role:manager');
     });
+
+    Route::get('/dashboard/stats', [DashboardController::class, 'stats'])->middleware('role:admin,manager,officer,borrower');
 });
