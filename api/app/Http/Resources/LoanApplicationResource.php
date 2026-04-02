@@ -27,6 +27,9 @@ class LoanApplicationResource extends JsonResource
             'purpose'             => $this->purpose,
             'description'         => $this->description,
             'created_at'          => $this->created_at,
+            'umkm_profile'        => new UmkmProfileResource($this->whenLoaded('umkmProfile')),
+            'amortization_schedules' => AmortizationScheduleResource::collection($this->whenLoaded('amortizationSchedules')),
+            'approval_logs'       => ApprovalLogResource::collection($this->whenLoaded('approvalLogs')),
         ];
     }
 }
