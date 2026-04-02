@@ -43,9 +43,9 @@ const handleRegister = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[#F8F8F8] font-sans py-12 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen flex items-center justify-center bg-[#F8F8F8] py-12 px-4 sm:px-6 lg:px-8">
     
-    <div class="bg-white p-10 rounded-[10px] border border-gray-100 w-full max-w-[500px] shadow-sm">
+    <div class="bg-white p-10 rounded-[10px] border border-gray-100 w-full max-w-[500px]">
       
       <div class="text-center mb-8">
         <div class="flex items-center justify-center gap-2.5 mb-6">

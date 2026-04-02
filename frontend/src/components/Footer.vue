@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <footer class="bg-[#F8F8F8] pt-40 pb-20 mt-16 relative">
+  <footer class="bg-[#F8F8F8] pt-40 pb-20 relative">
     <div class="w-[1200px] px-16 mx-auto grid grid-cols-12 gap-16">
       
       <div class="col-span-5 space-y-6">
